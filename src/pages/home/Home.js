@@ -25,26 +25,31 @@ const Home = () => {
   return isLoading ? (
     <span> En cours de chargement... </span>
   ) : (
-    <div className='offer'>
+    <div className='offer-container'>
       {data.offers.map((offer) => {
         return (
           <Link to={`/offer/${offer._id}`} key={offer._id}>
-            <div className='link'>
+            <div className='link-card'>
               {offer.owner && (
-                <div className='offer-avatar'>
+                <div className='avatar'>
                   <img
                     src={offer.owner.account.avatar.secure_url}
                     alt='avatar'
+                    className='img-avatar'
                   ></img>
                   <h3>{offer.owner.account.username}</h3>
                 </div>
               )}
 
-              <img src={offer.product_image.secure_url} alt='product'></img>
+              <img
+                src={offer.product_image.secure_url}
+                alt='product'
+                className='product'
+              ></img>
               <p>{offer.product_price} €</p>
               {offer.product_details.map((item, index) => {
                 return (
-                  <div key={index}>
+                  <div key={index} className='details'>
                     <p>{item.TAILLE}</p>
                     <p>{item.MARQUE}</p>
                   </div>
