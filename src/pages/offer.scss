@@ -1,0 +1,92 @@
+.offer {
+  background-color: #ebedee;
+  height: calc(100vh - 100px);
+}
+
+.offer-container {
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1080px;
+  margin: 0 auto;
+
+  .offer-img {
+    width: 442px;
+    height: 600px;
+    object-fit: cover;
+  }
+
+  .offer-details {
+    width: 450px;
+    height: 600px;
+    background-color: white;
+    padding: 30px 40px;
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .details {
+      border-bottom: 1px solid #bbb;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+
+      li {
+        margin-bottom: 15px;
+        .keys {
+          display: inline-block;
+          font-size: 0.9rem;
+          color: #bbb;
+          min-width: 180px;
+        }
+        .values {
+          // text-align: left;
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .name {
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      line-height: 1.3rem;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .owner {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 30px;
+
+      img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
+    }
+
+    button {
+      border: none;
+      width: 100%;
+      padding: 10px 0;
+      border-radius: 7px;
+      background-color: #2cb1ba;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointers;
+      margin-bottom: 20px;
+    }
+  }
+}
