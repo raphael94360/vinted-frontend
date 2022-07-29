@@ -8,19 +8,18 @@ const Offer = () => {
 
   const [isLoading, setIsLoading] = useState(true)
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`https://lereacteur-vinted-api.herokuapp.com/offer/${id}`)
-      setData(response.data)
-      setIsLoading(false)
-    } catch (error) {
-      console.log(error.response)
-    }
-  }
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://lereacteur-vinted-api.herokuapp.com/offer/${id}`)
+        setData(response.data)
+        setIsLoading(false)
+      } catch (error) {
+        console.log(error.response)
+      }
+    }
     fetchData()
-  }, [])
+  }, [id])
 
   return isLoading ? (
     <span> En cours de chargement... </span>
