@@ -1,24 +1,41 @@
 import logo from "../assets/logo.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom"
+import Cookies from "js-cookie"
+import { useState } from "react"
 
 const Header = () => {
+  const [token, setToken] = useState(Cookies.get("token"))
+
+  const handleRemoveCookie = () => {
+    setToken(Cookies.remove("token"))
+  }
+
   return (
     <div className="header-container">
       <Link to="/">
         <img src={logo} alt="logo"></img>
       </Link>
-
       <span className="icon-container">
         <FontAwesomeIcon icon="magnifying-glass" className="icon" />
       </span>
-
       <input type="text" placeholder="Recherche des articles" />
 
-      <Link to="/signup">
-        <button>S'inscrire</button>
-      </Link>
-      <button>Se connecter</button>
+      {token ? (
+        <Link to="/">
+          <button onClick={handleRemoveCookie}>Se déconnecter</button>
+        </Link>
+      ) : (
+        <>
+          <Link to="/signup">
+            <button>S'inscrire</button>
+          </Link>
+
+          <Link to="/login">
+            <button>Se connecter</button>
+          </Link>
+        </>
+      )}
     </div>
   )
 }
