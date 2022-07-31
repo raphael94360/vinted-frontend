@@ -35,7 +35,7 @@ const Home = () => {
               <div className="link-card">
                 {offer.owner && (
                   <div className="avatar">
-                    <img src={offer.owner.account.avatar.secure_url} alt="avatar" className="img-avatar"></img>
+                    {/* <img src={offer.owner.account.avatar.secure_url} alt="avatar" className="img-avatar"></img> */}
                     <h3>{offer.owner.account.username}</h3>
                   </div>
                 )}
