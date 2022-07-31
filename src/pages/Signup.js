@@ -1,34 +1,33 @@
 import { useState } from "react"
 import axios from "axios"
-import cookie from "js-cookie"
+import Cookies from "js-cookie"
 
 const Signup = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [newsletter, setNewsletter] = useState(false)
-  const [token, setToken] = useState(cookie.get("token") || "")
+  const [token, setToken] = useState(Cookie.get("token"))
 
   console.log(token)
 
-  // console.log(username)
+  const handleSubmit = async event => {
+    event.preventDefault()
+    try {
+      const response = axios.post("https://lereacteur-vinted-api.herokuapp.com/user/signup", {
+        username: username,
+        email: email,
+        password: password,
+        newsletter: newsletter
+      })
 
-  const handleSubmit = () => {
-    const fetchData = async () => {
-      try {
-        const response = axios.post("https://lereacteur-vinted-api.herokuapp.com/user/signup", {
-          username: username,
-          email: email,
-          password: password,
-          newsletter: newsletter
-        })
+      console.log(response.data)
 
-        setToken(cookie.set("token", response.data.token, { expire: 5 }))
-      } catch (error) {
-        console.log(error.response)
-      }
+      Cookies.set("token", response.data.token, { expire: 3 })
+      setToken(response.data.token)
+    } catch (error) {
+      console.log(error.response)
     }
-    fetchData()
   }
 
   return (
