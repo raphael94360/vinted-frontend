@@ -4,30 +4,13 @@ import Cookies from "js-cookie"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 
-const Signup = () => {
+const Signup = ({ token, setToken }) => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [newsletter, setNewsletter] = useState(true)
-  const [token, setToken] = useState(Cookies.get("token"))
+  const [newsletter, setNewsletter] = useState(false)
 
   console.log(token)
-
-  const handleUserName = event => {
-    setUsername(event.target.value)
-  }
-
-  const handleEmail = event => {
-    setEmail(event.target.value)
-  }
-
-  const handlePassword = event => {
-    setPassword(event.target.value)
-  }
-
-  const handleNewsLetter = event => {
-    setNewsletter(event.target.value)
-  }
 
   const navigate = useNavigate()
 
@@ -43,9 +26,9 @@ const Signup = () => {
 
       console.log(response.data)
 
-      Cookies.set("token", response.data.token, { expires: 3 })
+      Cookies.set("token", response.data.token)
       setToken(response.data.token)
-      navigate("/login")
+      navigate("/")
     } catch (error) {
       console.log(error.response)
     }
@@ -56,11 +39,44 @@ const Signup = () => {
       <div className="inscription-container">
         <h1>S'inscrire</h1>
         <form onSubmit={handleSubmit} className="form">
-          <input type="text" placeholder="Nom d'utilisateur" name="name" value={username} onChange={handleUserName}></input>
-          <input type="email" placeholder="Email" name="email" value={email} onChange={handleEmail}></input>
-          <input type="text" placeholder="Mot de passe" name="password" value={password} onChange={handlePassword}></input>
+          <input
+            type="text"
+            placeholder="Nom d'utilisateur"
+            name="name"
+            value={username}
+            onChange={event => {
+              setUsername(event.target.value)
+            }}
+          ></input>
+
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            value={email}
+            onChange={event => {
+              setEmail(event.target.value)
+            }}
+          ></input>
+
+          <input
+            type="password"
+            placeholder="Mot de passe"
+            name="password"
+            value={password}
+            onChange={event => {
+              setPassword(event.target.value)
+            }}
+          ></input>
+
           <div className="newsletter">
-            <input type="checkbox" value={newsletter} onChange={handleNewsLetter} />
+            <input
+              type="checkbox"
+              value={newsletter}
+              onChange={() => {
+                setNewsletter(!newsletter)
+              }}
+            />
             <span> S'inscrire à notre newsletter</span>
           </div>
 

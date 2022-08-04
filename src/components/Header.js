@@ -2,14 +2,12 @@ import logo from "../assets/logo.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom"
 import Cookies from "js-cookie"
-import { useState } from "react"
+// import { useState } from "react"
 
-const Header = () => {
-  const [token, setToken] = useState(Cookies.get("token"))
-
-  const handleRemoveCookie = () => {
-    setToken(Cookies.remove("token"))
-  }
+const Header = ({ token, setToken }) => {
+  // const handleRemoveCookie = () => {
+  //   setToken(Cookies.remove("token"))
+  // }
 
   return (
     <div className="header-container">
@@ -23,7 +21,14 @@ const Header = () => {
 
       {token ? (
         <Link to="/">
-          <button onClick={handleRemoveCookie}>Se déconnecter</button>
+          <button
+            onClick={() => {
+              Cookies.remove("token")
+              setToken(null)
+            }}
+          >
+            Se déconnecter
+          </button>
         </Link>
       ) : (
         <>
